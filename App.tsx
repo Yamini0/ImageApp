@@ -18,7 +18,7 @@ import axios from 'axios';
 
 const App = () => {
   const [data, setData] = useState<ApiResponse[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const page = useRef(1);
 
@@ -40,8 +40,6 @@ const App = () => {
   useEffect(() => {
     getImageFromApi(true);
   }, []);
-
-  console.log(data);
 
   const renderItem = useCallback(({item}: ListRenderItemInfo<ApiResponse>) => {
     return <Image source={{uri: item?.urls?.raw}} style={styles.imageItem} />;
