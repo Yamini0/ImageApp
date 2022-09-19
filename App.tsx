@@ -41,6 +41,11 @@ const App = () => {
     }
   };
 
+  const fetchMoreData = useCallback(() => {
+    page.current += 1;
+    getImageFromApi(false);
+  }, []);
+
   useEffect(() => {
     getImageFromApi(true);
     if (data.length < 20) {
@@ -50,11 +55,6 @@ const App = () => {
 
   const renderItem = useCallback(({item}: ListRenderItemInfo<ApiResponse>) => {
     return <Image source={{uri: item?.urls?.raw}} style={styles.imageItem} />;
-  }, []);
-
-  const fetchMoreData = useCallback(() => {
-    page.current += 1;
-    getImageFromApi(false);
   }, []);
 
   if (loading) {

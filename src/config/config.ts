@@ -1,6 +1,6 @@
 export const env = {
   BASE_URL: 'https://api.unsplash.com/',
-  ACCESS_KEY: 'Ahq6ttXmpZpHihnRIPTH3L7X70CK9C97yzY8REneYfQ',
+  ACCESS_KEY: 'l0cd366ec4qhzpZhcAz7pw9J2YHKn2d12K0_Lb56P4k',
 };
 
 import axios from 'axios';
