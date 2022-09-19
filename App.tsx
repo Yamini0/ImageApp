@@ -8,6 +8,7 @@ import {
   FlatList,
   ListRenderItemInfo,
   ActivityIndicator,
+  ScrollView,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
@@ -20,7 +21,7 @@ const App = () => {
   const [data, setData] = useState<ApiResponse[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const page = useRef(1);
+  const page = useRef<number>(1);
 
   const getImageFromApi = async (isLoading: boolean) => {
     try {
@@ -59,11 +60,12 @@ const App = () => {
   }
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <FlatList
         keyExtractor={item => `${item?.user?.name}-${item?.id}`}
         numColumns={3}
         data={data}
+        onEndReachedThreshold={0.8}
         renderItem={renderItem}
         onEndReached={fetchMoreData}
         horizontal={false}
@@ -79,7 +81,8 @@ const styles = StyleSheet.create({
   },
   list: {
     width: '100%',
-    backgroundColor: '#000000',
+    backgroundColor: '#000',
+    flex: 1,
   },
   spinner: {
     justifyContent: 'center',
