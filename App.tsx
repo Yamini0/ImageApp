@@ -25,6 +25,9 @@ const App = () => {
 
   const getImageFromApi = async (isLoading: boolean) => {
     try {
+      if (isLoading) {
+        setLoading(true);
+      }
       const {data} = await axios.get<ApiResponse[]>(
         `${env.BASE_URL}photos?page=${page.current}&client_id=${env.ACCESS_KEY}`,
       );
@@ -40,6 +43,9 @@ const App = () => {
 
   useEffect(() => {
     getImageFromApi(true);
+    if (data.length < 20) {
+      fetchMoreData();
+    }
   }, []);
 
   const renderItem = useCallback(({item}: ListRenderItemInfo<ApiResponse>) => {
@@ -48,7 +54,7 @@ const App = () => {
 
   const fetchMoreData = useCallback(() => {
     page.current += 1;
-    getImageFromApi(true);
+    getImageFromApi(false);
   }, []);
 
   if (loading) {
